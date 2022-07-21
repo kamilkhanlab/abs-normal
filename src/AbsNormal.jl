@@ -13,7 +13,7 @@ struct AnfCoeffs
     Y::Matrix{Float64}
 end
 
-@enum EquationSolvingApproach begin
+@enum SolutionApproach begin
     BY_MLCP
     BY_LCP
 end
@@ -29,12 +29,16 @@ end
 
 recover_anf_coeffs(a::AnfCoeffs) = a.c, a.b, a.Z, a.L, a.J, a.Y
 
-function solve_pa_equation(a::AnfCoeffs; approach::EquationSolvingApproach = BY_MLCP)
+function solve_pa_equation(
+    a::AnfCoeffs;
+    approach::SolutionApproach = BY_MLCP,
+    optimizer = PATHSolver.Optimizer,
+    solverAttributes = ("output" => "no",)
+)
     aMod = modify_anf_coeffs(a::AnfCoeffs)
     (cm, bm, Zm, Lm, Jm, Ym) = recover_anf_coeffs(aMod)
 
-    anfModel = JuMP.Model(PATHSolver.Optimizer)
-    JuMP.set_optimizer_attribute(anfModel, "output", "no")
+    anfModel = JuMP.Model(JuMP.optimizer_with_attributes(optimizer, solverAttributes...))
 
     if approach == BY_MLCP
         JuMP.@variable(anfModel, x[1:size(Zm)[2]])
