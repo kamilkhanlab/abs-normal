@@ -19,7 +19,7 @@ end
 end
 
 function modify_anf_coeffs(a::AnfCoeffs)
-    IMinusL = I - a.L
+    IMinusL = UnitLowerTriangular(I - a.L)
     (cm, Zm, Lm) = map(X -> IMinusL\X, (a.c, a.Z, I+a.L))
     bm = a.b + a.Y*cm
     Ym = a.Y*(I + Lm)
@@ -134,7 +134,7 @@ function example_3()
     c = [0.0]
     b = [-1.0]
     Z = [1.0;;]
-    L = LowerTriangular(zeros(1, 1))
+    L = LowerTriangular([0.0;;])
     J = [0.0;;]
     Y = [1.0;;]
 
