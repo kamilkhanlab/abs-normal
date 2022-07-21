@@ -29,7 +29,7 @@ JuMP.optimize!(model)
 
 struct AnfCoeffs
     c::Vector{Float64}
-    b::Union{Float64, Vector{Float64}}
+    b::Vector{Float64}
     Z::Matrix{Float64}
     L::LowerTriangular{Float64, Matrix{Float64}}
     J::Matrix{Float64}
@@ -98,12 +98,10 @@ end
 # solve the equation system:
 # 0 = 1 + x - abs(x) + abs(x + abs(x))
 function example_1()
-
     const c = [0.0, 0.0]
     const b = [1.0]
     const Z = [1.0; 1.0;;]
-    const L = LowerTriangular([0.0 0.0;
-                               1.0 0.0])
+    const L = LowerTriangular([0.0 0.0; 1.0 0.0])
     const J = [1.0;;]
     const Y = [-1.0 1.0]
 
