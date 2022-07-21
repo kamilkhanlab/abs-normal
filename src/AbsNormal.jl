@@ -27,14 +27,11 @@ function modify_anf_coeffs(a::AnfCoeffs)
     return AnfCoeffs(cm, bm, Zm, Lm, Jm, Ym)
 end
 
+recover_anf_coeffs(a::AnfCoeffs) = a.c, a.b, a.Z, a.L, a.J, a.Y
+
 function solve_pa_equation(a::AnfCoeffs; approach::EquationSolvingApproach = BY_MLCP)
     aMod = modify_anf_coeffs(a::AnfCoeffs)
-    cm = aMod.c
-    bm = aMod.b
-    Zm = aMod.Z
-    Lm = aMod.L
-    Jm = aMod.J
-    Ym = aMod.Y
+    (cm, bm, Zm, Lm, Jm, Ym) = recover_anf_coeffs(aMod)
 
     anfModel = JuMP.Model(PATHSolver.Optimizer)
     JuMP.set_optimizer_attribute(anfModel, "output", "no")
@@ -69,7 +66,7 @@ function solve_pa_equation(a::AnfCoeffs; approach::EquationSolvingApproach = BY_
         throw(DomainError(:approach, "unsupported equation-solving approach"))
     end
 
-    return xStar, terminationStatus
+    return xStar, terminationStatus, aMod
 end
 
 # test PATHSolver.jl using its documented example
