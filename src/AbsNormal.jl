@@ -128,5 +128,24 @@ function example_2()
     @show terminationStatus
 end
 
+# solve the equation system:
+#   0 = abs(x) - 1
+function example_3()
+    c = [0.0]
+    b = [-1.0]
+    Z = [1.0;;]
+    L = LowerTriangular(zeros(1, 1))
+    J = [0.0;;]
+    Y = [1.0;;]
+
+    anf = AnfCoeffs(c, b, Z, L, J, Y)
+
+    xStar, terminationStatus = solve_pa_equation(anf)
+
+    @show xStar
+    @show terminationStatus
+end
+
 example_1()
 example_2()
+example_3()
