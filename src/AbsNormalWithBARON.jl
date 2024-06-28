@@ -205,7 +205,7 @@ function minimize_pa_function(
         
         wStar = JuMP.value.(w)
         xStar = JuMP.value.(x)
-        optimal = bm + Jm * xStar + Ym * wStar
+        fStar = bm + Jm * xStar + Ym * wStar
         
     
     elseif approach == BY_MILP
