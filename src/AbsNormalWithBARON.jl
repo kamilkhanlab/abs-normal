@@ -13,7 +13,8 @@ export AnfCoeffs,
     SolutionApproachOptim, BY_LPCC, BY_MILP,
     solve_pa_equation,
     verify_minimum_existence,
-    minimize_pa_function
+    minimize_pa_function,
+    modify_anf_coeffs
 
 
 using LinearAlgebra
