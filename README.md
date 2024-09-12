@@ -5,7 +5,7 @@ Tools in Julia for solving equations and optimization problems involving piecewi
 
 ## Background
 
-As shown by [Griewank et al. (2015)](https://doi.org/10.1016/j.laa.2014.12.017), any continuous piecewise-affine function $\mathbf{f}:R^n\to R^m$ may be evaluated as part of the solution $(\mathbf{z}, \mathbf{f}(\mathbf{x}))$ of the following equation system:
+As shown by [Griewank et al. (2015)](https://doi.org/10.1016/j.laa.2014.12.017), any continuous piecewise-affine function $\mathbf{f}:R^n\to R^m$ may be evaluated as part of the solution $(\mathbf{z}, \mathbf{f}(\mathbf{x}))$ of an equation system with the following format:
 
 $$
 \mathbf{z} = \mathbf{c} + \mathbf{Z}\mathbf{x} + \mathbf{L}|\mathbf{z}| 
