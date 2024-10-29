@@ -8,14 +8,21 @@ module AbsNormal
 
 import JuMP, PATHSolver, GLPK
 
+# A temporary PATH license that is valid for a year
+# Which can be found in https://pages.cs.wisc.edu/~ferris/path/julia/LICENSE
+PATHSolver.c_api_License_SetString("2830898829&Courtesy&&&USR&45321&5_1_2021&1000&PATH&GEN&31_12_2025&0_0_0&6000&0_0")
+
 export AnfCoeffs,
     SolutionApproachEq, BY_MLCP, BY_LCP,
+    SolutionApproachEqGriewank, BY_GriewankMLCP, BY_GriewankLCP,
     SolutionApproachOptim, BY_LPCC, BY_MILP,
+    SolverEq, BY_PATHSolver, BY_BARON,
     solve_pa_equation,
+    solve_pa_equation_Griewank,
     verify_minimum_existence,
     minimize_pa_function,
-    modify_anf_coeffs
-
+    modify_anf_coeffs,
+    recover_anf_coeffs
 
 using LinearAlgebra
 
@@ -37,6 +44,16 @@ end
 @enum SolutionApproachOptim begin
     BY_LPCC
     BY_MILP
+end
+
+@enum SolutionApproachEqGriewank begin
+    BY_GriewankMLCP
+    BY_GriewankLCP
+end
+
+@enum SolverEq begin
+    BY_PATHSolver
+    BY_BARON
 end
 
 function modify_anf_coeffs(a::AnfCoeffs)
@@ -107,10 +124,56 @@ function solve_pa_equation(
     return xStar, terminationStatus, aMod
 end
 
+function solve_pa_equation_Griewank(
+    a::AnfCoeffs;
+    approach::SolutionApproachEqGriewank = BY_GriewankLCP,
+    optimizer = PATHSolver.Optimizer,
+    solverAttributes = ("output" => "no",)
+)
+    (c, b, Z, L, J, Y) = recover_anf_coeffs(a::AnfCoeffs)
+    
+    ZJInv = Z/J
+    gamma = c - ZJInv*b
+    S = L - ZJInv*Y
+    
+    anfModel = JuMP.Model(JuMP.optimizer_with_attributes(optimizer, solverAttributes...))
+        
+    if approach == BY_GriewankMLCP 
+        
+        error("this requires BARON; please install BARON and use AbsNormalWithBARON.jl instead.")
+
+    elseif approach == BY_GriewankLCP
+        
+        IMinusS = I - S
+
+        JuMP.@variable(anfModel, w[1:length(c)] >= 0.0)
+
+        JuMP.@constraint(anfModel, complements(IMinusS\gamma + IMinusS\(I+S)*w, w))
+            
+        JuMP.optimize!(anfModel)
+        terminationStatus = JuMP.termination_status(anfModel)
+        
+        if terminationStatus in [JuMP.OPTIMAL, JuMP.LOCALLY_SOLVED]
+            wStar = JuMP.value.(w)
+            uStar = IMinusS\gamma + IMinusS\(I+S)*wStar
+            xStar = -J\(b + Y*(uStar+wStar))
+        else 
+            uStar = Inf
+            wStar = Inf
+            xStar = Inf
+        end
+    
+    else
+        throw(DomainError(:approach, "unsupported equation-solving approach"))
+    end
+
+    return xStar, terminationStatus
+end
+
 
 function verify_minimum_existence(
     a::AnfCoeffs;
-    approach::SolutionApproachEq = BY_LCP
+    approach::SolutionApproachEq = BY_MLCP
 )
     aMod = modify_horizf_coeffs(a::AnfCoeffs)
     (cm, bm, Zm, Lm, Jm, Ym) = recover_anf_coeffs(aMod)
@@ -118,23 +181,6 @@ function verify_minimum_existence(
     if approach == BY_MLCP
         
         error("this requires BARON; please install BARON and use AbsNormalWithBARON.jl instead.")
-
-    elseif approach == BY_LCP
-
-        optimizer = PATHSolver.Optimizer
-        solverAttributes = ("output" => "no",)
-        horizfModel = JuMP.Model(JuMP.optimizer_with_attributes(optimizer, solverAttributes...))
-        
-        ZJmInv = Zm/Jm
-        gamma = -ZJmInv*bm
-        S = Lm - ZJmInv*Ym
-
-        JuMP.@variable(horizfModel, omega[1:size(Zm)[1]] >= 0.0)
-
-        JuMP.@constraint(horizfModel, complements(gamma + S*omega, omega))
-
-        JuMP.optimize!(horizfModel)
-        terminationStatus_horizf = JuMP.termination_status(horizfModel)
         
     else
         throw(DomainError(:approach, "unsupported equation-solving approach"))
@@ -164,8 +210,8 @@ function minimize_pa_function(
     
     if approach == BY_LPCC
         
-        error("this requires BARON; please install BARON and use AbsNormalWithBARON.jl instead.")
-        
+        error(" this requires BARON; please install BARON and use AbsNormalWithBARON.jl instead.")
+        verify_minimum_existence
     
     elseif approach == BY_MILP
         
@@ -198,10 +244,8 @@ function minimize_pa_function(
     
     
     if terminationStatus_minif in [JuMP.OPTIMAL, JuMP.LOCALLY_SOLVED]
-        #global_minimum = "PA function f has a global minimum"
         xStar = JuMP.value.(x)
     else
-        #global_minimum = "PA function f does not have a global minimum"
         xStar = Inf
         println("Minimum not found")
     end
