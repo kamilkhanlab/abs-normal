@@ -1,13 +1,13 @@
 include("../src/AbsNormalWithBARON.jl")
 
-using .AbsNormal, LinearAlgebra
+using .AbsNormal, LinearAlgebra, TimerOutputs, JuMP
 
 @enum TypeofProblem begin
     root_finding
     optimal_finding
 end
 
-# For use in generating matrices Y and J
+# For use in generating matrix Y in root finding problem 
 function generate_nonzero_matrix(m, n)
     A = round.(randn(m, n))
     for i in 1:m, j in 1:n
@@ -18,40 +18,76 @@ function generate_nonzero_matrix(m, n)
     return A
 end
 
+# For use in checking if there is a row in a given matrix (S) that is entirely zero
+# If a zero row (ith) exists in S, gamma[i] + (S*w)[i] >= 0.0 will cause an error of 
+# "MethodError: Cannot `convert` an object of type Float64 to an object of type Expr".
+# This rarely happens when dimension n > 2. 
+function is_valid_example_for_BARON(aMod)
+    (cm, bm, Zm, Lm, Jm, Ym) = recover_anf_coeffs(aMod)
+    ZJmInv = Zm/Jm
+    gamma = cm - ZJmInv*bm
+    S = Lm - ZJmInv*Ym
+    return !any(all(==(0), row) for row in eachrow(S))
+end
 
 # Generate a somewhat arbitrary piecewise affine function
-function generate_pa(problem::TypeofProblem, n)
-    # Generate random values for m, n, and s
+function generate_pa(problem::TypeofProblem, n; compare_with_Griewank::Bool=false)
     if problem == root_finding
-        min_dim = 1
-        if n == 1
-            max_dim = 1
-        else
-            max_dim = n - 1
-        end
-        # n = rand(min_dim:max_dim) 
         m = n
-        s = rand(min_dim:max_dim) 
-    elseif problem == optimal_finding
-        min_dim = 1
-        if n == 1
-            max_dim = 1
-        else
-            max_dim = n - 1
+        s = n
+
+        c = round.(randn(s), digits=0)
+        L = LowerTriangular(zeros(s, s)) # Initialize a matrix of zeros with size s x s
+        for i in 2:s
+            L[i, i-1] = 1.0 # Set the elements just below the diagonal to 1
         end
+        
+        Z = Diagonal(ones(n))
+        
+        # Conditional setting of J based on compare_with_Griewank flag
+        if compare_with_Griewank
+            J = Diagonal(ones(n)) # Set J as a diagonal matrix with ones
+        else
+            J = zeros(n, n) # Set J as a zero matrix
+        end
+        
+        Y = generate_nonzero_matrix(m, s)
+        b = zeros(m) 
+        
+        x = round.(randn(n) * 10, digits=0)
+        # Adjusting the randomly generated function by modifying b
+        # This could ensure the generated function has a root
+        z = zeros(s)
+        for i in 1:s
+            z[i] = c[i] + dot(Z[i, :], x) + dot(L[i, :], abs.(z))
+        end
+        f_x = b .+ J * x .+ Y * abs.(z)
+        b = -f_x
+        
+        return c, b, Z, L, J, Y, x, f_x
+    
+    elseif problem == optimal_finding
         m = 1
-        s = rand(min_dim:max_dim) 
-    end
-    
-    c = round.(randn(s), digits=0)
-    b = round.(randn(m), digits=0)
-    L = LowerTriangular(tril(round.(randn(s, s), digits=0), -1))
-    Z = generate_nonzero_matrix(s, n)
-    J = generate_nonzero_matrix(m, n)
-    Y = generate_nonzero_matrix(m, s)
-    
-    return c, b, Z, L, J, Y
+        s = n
+
+        c = zeros(n) 
+        b = ones(m) 
+        L = LowerTriangular(zeros(s, s)) # Initialize a matrix of zeros with size s x s
+        for i in 2:s
+            L[i, i-1] = 1.0 # Set the elements just below the diagonal to 1
+        end
+        
+        Z = Diagonal(ones(n) * 1000)
+        J = zeros(m, n)
+        Y = zeros(m, s)
+        Y[end] = 1.0
+        
+        return c, b, Z, L, J, Y
+    else
+        error("Unsupported problem type")
+    end 
 end
+
 
 
 
@@ -102,159 +138,204 @@ function example_3()
     
     anf = AnfCoeffs(c, b, Z, L, J, Y)
     
-    terminationStatus_horizf1, existence = verify_minimum_existence(anf,approach=BY_LCP)
-
-    xStarMILP, terminationStatus_minif = minimize_pa_function(anf,approach=BY_MILP)
-        @show existence
-        @show xStarMILP
     
-    terminationStatus_horizf2, global_minimum2 = verify_minimum_existence(anf,approach=BY_MLCP)
+    terminationStatus_horizf, existence = verify_minimum_existence(anf,approach=BY_MLCP)
 
     xStarLPCC, terminationStatus_minif = minimize_pa_function(anf,approach=BY_LPCC)
         @show existence
         @show xStarLPCC
+    
+    xStarMILP, terminationStatus_minif = minimize_pa_function(anf,approach=BY_MILP)
+        @show existence
+        @show xStarMILP
 
 end
 
 example_3()
 
+
 # Matrix dimensions to consider:
-values_of_n = [1,5,10,50,100,200,300,400,500]  # Add more values as needed
+values_of_n = [2,5,10,20,50,100,200,300,400,500]  # Add more values as needed
 
+# Solve 10 somewhat arbitrary root-finding instance for each considered dimension
+max_iters = 10
 
-# Initialize a dictionary to store CPU times for each value of n
-cpu_times_MLCP = Dict{Int, Float64}()
-cpu_times_LCP = Dict{Int, Float64}()
+function exampleRoot()
+    # Create an array to store TimerOutputs for each nest
+    timer_outputs = []
 
-function exampleRoot(n, cpu_time_MLCP, cpu_time_LCP, count_iter)
-    
-    c, b, Z, L, J, Y = generate_pa(root_finding, n)
-    anf = AnfCoeffs(c, b, Z, L, J, Y)
-    aMod = modify_anf_coeffs(anf)
+    for (i, n) in enumerate(values_of_n)
+        # Create a new TimerOutput for each "nest" and store it in the array
+        to = TimerOutput()
+        push!(timer_outputs, to)
 
-    is_nonsingular(m::Matrix) = (cond(m) < 1e6)
-
-    if is_nonsingular(aMod.J)
-        cpu_time_MLCP += @elapsed begin
-            solve_pa_equation(anf, approach=BY_MLCP)
-        end
+        @timeit to "nest(n=$n)" begin
+            
+            count_iter = 0
         
-        cpu_time_LCP += @elapsed begin
-           solve_pa_equation(anf, approach=BY_LCP)
+            while count_iter < max_iters 
+                @timeit to "generate_PA_function" begin
+                    c, b, Z, L, J, Y = generate_pa(root_finding, n)
+                    anf = AnfCoeffs(c, b, Z, L, J, Y)
+                    aMod = modify_anf_coeffs(anf)
+                end
+                
+                is_nonsingular(m::Matrix) = (cond(m) < 1e6)
+                if is_nonsingular(aMod.J)
+                    if is_valid_example_for_BARON(aMod)
+                        count_iter += 1
+                        # Measure CPU time
+                        
+                        @timeit to "solve_by_MLCP_BARON" solve_pa_equation(anf, approach=BY_MLCP,solver=BY_BARON)                       
+                        xStar_MLCP, terminationStatus_MLCP = solve_pa_equation(anf, approach=BY_MLCP,solver=BY_PATHSolver)
+                        if terminationStatus_MLCP in [JuMP.OPTIMAL, JuMP.LOCALLY_SOLVED]
+                            @timeit to "solve_by_MLCP_PATH" solve_pa_equation(anf, approach=BY_MLCP,solver=BY_PATHSolver)
+                        end
+                        
+                        
+                        @timeit to "solve_by_LCP_BARON" solve_pa_equation(anf, approach=BY_LCP,solver=BY_BARON)
+                        xStar_LCP, terminationStatus_LCP = solve_pa_equation(anf, approach=BY_LCP,solver=BY_PATHSolver)
+                        if terminationStatus_LCP in [JuMP.OPTIMAL, JuMP.LOCALLY_SOLVED]
+                            @timeit to "solve_by_LCP_PATH" solve_pa_equation(anf, approach=BY_LCP,solver=BY_PATHSolver)
+                        end
+ 
+                    end
+                end
+            end
         end
-        
-        count_iter += 1
+        show(to, title = "Results for n = $n", allocations = false, linechars=:ascii, sortby=:firstexec)
+        println("\n")
     end
-    
-    return cpu_time_MLCP, cpu_time_LCP, count_iter
-end
-    
-
-# Solve 5 somewhat arbitrary root-finding instances for each considered dimension:
-max_iters = 5
-
-for n in values_of_n
-    
-    println("Running loop for n = $n")
-    cpu_time_MLCP = 0.0
-    cpu_time_LCP = 0.0
-    count_iter = 0
-
-    # Measure CPU time
-    while count_iter < max_iters
-        # Update cpu_time_MLCP, cpu_time_LCP, and count_iter by calling the example function with them as arguments
-        cpu_time_MLCP, cpu_time_LCP, count_iter = exampleRoot(n, cpu_time_MLCP, cpu_time_LCP, count_iter)
-        #print(cpu_time_LPCC)
+    # Merge all TimerOutputs into a single TimerOutput
+    merged_to = TimerOutput()
+    for to in timer_outputs
+        merge!(merged_to, to)
     end
-
-    # Store the total CPU time for running the loop for the current value of n in the dictionary
-    cpu_times_MLCP[n] = cpu_time_MLCP
-    cpu_times_LCP[n] = cpu_time_LCP
-    
-    # Print total CPU time for running the loop for the current value of n
-    println("Average CPU time for solving f(x)=0 using MLCP for n = $n: ", cpu_time_MLCP/count_iter)
-    println("Average CPU time for solving f(x)=0 using LCP for n = $n: ", cpu_time_LCP/count_iter)
-    
+    # Display the merged timing results
+    show(merged_to, title="Results for all n", allocations = false, linechars=:ascii, sortby=:firstexec)
 end
 
-# Generate a somewhat arbitrary piecewise affine function
-function generate_pa_n(n)
-    # Define the range for random values
-    m = 1
-    s = n
+#exampleRoot()
 
-    c = ones(n) * 0.0
-    b = ones(m) 
-    L = LowerTriangular(zeros(s, s)) # Initialize a matrix of zeros with size n x n
-    for i in 2:s
-        L[i, i-1] = 1.0 # Set the elements just above the diagonal to 1
+
+# Matrix dimensions to consider:
+values_of_n = [2,5,10,20,50,100]  # Add more values as needed
+
+# Solve 10 somewhat arbitrary root-finding instance for each considered dimension
+max_iters = 10
+
+function compareWithGriewank()
+    # Create an array to store TimerOutputs for each nest
+    timer_outputs = []
+
+    for (i, n) in enumerate(values_of_n)
+        # Create a new TimerOutput for each "nest" and store it in the array
+        to = TimerOutput()
+        push!(timer_outputs, to)
+
+        @timeit to "nest(n=$n)" begin
+            
+            count_iter = 0
+            
+            while count_iter < max_iters 
+                @timeit to "generate_PA_function" begin
+                    c, b, Z, L, J, Y = generate_pa(root_finding, n, compare_with_Griewank=true)
+                    anf = AnfCoeffs(c, b, Z, L, J, Y)
+                    aMod = modify_anf_coeffs(anf)
+                end
+                
+                is_nonsingular(m::Matrix) = (cond(m) < 1e6)
+                if is_nonsingular(aMod.J)
+                    if is_valid_example_for_BARON(aMod)
+                        count_iter += 1
+                        
+                        # Measure CPU time
+                        rootMLCP_Griewank, terminationStatusMLCP_Griewank = solve_pa_equation_Griewank(anf, approach=BY_GriewankMLCP,solver=BY_BARON)
+                        rootLCP_Griewank, terminationStatusLCP_Griewank = solve_pa_equation_Griewank(anf, approach=BY_GriewankLCP,solver=BY_PATHSolver)
+                        rootMLCP, terminationStatusMLCP = solve_pa_equation(anf, approach=BY_MLCP,solver=BY_PATHSolver)
+                        rootLCP, terminationStatusLCP = solve_pa_equation(anf, approach=BY_LCP,solver=BY_PATHSolver)
+
+                        if terminationStatusMLCP_Griewank in [JuMP.OPTIMAL, JuMP.LOCALLY_SOLVED]
+                            @timeit to "Griewank_solve_by_MLCP_BARON" solve_pa_equation_Griewank(anf, approach=BY_GriewankMLCP,solver=BY_BARON)
+                        end
+                        
+                        if terminationStatusLCP_Griewank in [JuMP.OPTIMAL, JuMP.LOCALLY_SOLVED]
+                            @timeit to "Griewank_solve_by_LCP_PATH" solve_pa_equation_Griewank(anf, approach=BY_GriewankLCP,solver=BY_PATHSolver)
+                        end
+                        
+                        if terminationStatusMLCP in [JuMP.OPTIMAL, JuMP.LOCALLY_SOLVED]
+                            @timeit to "solve_by_MLCP_PATH" solve_pa_equation(anf, approach=BY_MLCP,solver=BY_PATHSolver)
+                        end
+                        
+                        if terminationStatusLCP in [JuMP.OPTIMAL, JuMP.LOCALLY_SOLVED]
+                            @timeit to "solve_by_LCP_PATH" solve_pa_equation(anf, approach=BY_LCP,solver=BY_PATHSolver)
+                        end 
+                        
+                    end
+                end
+            end
+        end
+        show(to, title = "Results for n = $n", allocations = false, linechars=:ascii, sortby=:firstexec)
+        println("\n")
     end
-    #L = LowerTriangular(ones(s, s) - I)
-    Z = Diagonal(ones(n) * 1000)
-    J = zeros(m, n)
-    Y = zeros(m, s)
-    Y[end] = 1.0
-    
-    return c, b, Z, L, J, Y
+    # Merge all TimerOutputs into a single TimerOutput
+    merged_to = TimerOutput()
+    for to in timer_outputs
+        merge!(merged_to, to)
+    end
+    # Display the merged timing results
+    show(merged_to, title="Results for all n", allocations = false, linechars=:ascii, sortby=:firstexec)
 end
+
+#compareWithGriewank()
+
 
 # Define an array of considered matrix dimensions
-values_of_n = [1,5,10,50,100,200,300,400,500]  # Add more values as needed
+values_of_n = [2,5,10,20,50,100,200,300,400,500]  # Add more values as needed
 
-# Initialize a dictionary to store CPU times for each value of n
-cpu_times_MILP = Dict{Int, Float64}()
-cpu_times_LPCC = Dict{Int, Float64}()
+# minimize 10 somewhat arbitrary PA functions for each considered matrix dimension
+max_iters = 10
 
-function exampleOptim(n, cpu_time_MILP, cpu_time_LPCC, count_iter)
-    
-    c, b, Z, L, J, Y = generate_pa_n(n)
-    anf = AnfCoeffs(c, b, Z, L, J, Y)
-    terminationStatus_horizf, globalMinExists = verify_minimum_existence(anf, approach=BY_LCP)
-    #println("================================checking============================================")
-    if globalMinExists == true
-        #println("================================Example============================================")
-        cpu_time_MILP += @elapsed begin
-            xStar, fStar, terminationStatus = minimize_pa_function(anf,approach=BY_MILP)
-            # @show globalMinExists
-            # @show xStar
-            # @show fStar
+function exampleOptim()
+    # Create an array to store TimerOutputs for each nest
+    timer_outputs = []
+
+    for (i, n) in enumerate(values_of_n)
+        # Create a new TimerOutput for each "nest" and store it in the array
+        to = TimerOutput()
+        push!(timer_outputs, to)
+
+        @timeit to "nest(n=$n)" begin
+            
+            count_iter = 0
+        
+            while count_iter < max_iters 
+                @timeit to "generate_PA_function" begin
+                    c, b, Z, L, J, Y = generate_pa(optimal_finding, n)
+                    anf = AnfCoeffs(c, b, Z, L, J, Y)
+                end
+                
+                @timeit to "verify_minimum_existence" terminationStatus_horizf, globalMinExists = verify_minimum_existence(anf, approach=BY_MLCP)
+                
+                if globalMinExists == true
+                    @timeit to "minimize_by_MILP" minimize_pa_function(anf,approach=BY_MILP)
+                    @timeit to "minimize_by_LPCC" minimize_pa_function(anf,approach=BY_LPCC)
+                    count_iter += 1
+                end
+
+            end
         end
-
-        cpu_time_LPCC += @elapsed begin
-            xStar, fStar, terminationStatus = minimize_pa_function(anf,approach=BY_LPCC)
-            # @show globalMinExists
-            # @show xStar
-            # @show fStar
-        end
-        count_iter += 1
+        show(to, title = "Results for n = $n", allocations = false, linechars=:ascii, sortby=:firstexec)
+        println("\n")
     end
-    
-    return cpu_time_MILP, cpu_time_LPCC, count_iter
+    # Merge all TimerOutputs into a single TimerOutput
+    merged_to = TimerOutput()
+    for to in timer_outputs
+        merge!(merged_to, to)
+    end
+    # Display the merged timing results
+    show(merged_to, title="Results for all n", allocations = false, linechars=:ascii, sortby=:firstexec)
 end
 
+#exampleOptim()
 
-# minimize 5 somewhat arbitrary PA functions for each considered matrix dimension
-max_iters = 5
-
-for n in values_of_n
-    
-    println("Running loop for n = $n")
-    cpu_time_MILP = 0.0
-    cpu_time_LPCC = 0.0
-    count_iter = 0
-
-    # Measure CPU time
-    while count_iter < 5
-        # Update cpu_time_MLCP, cpu_time_LCP, and count_iter by calling the example function with them as arguments
-        cpu_time_MILP, cpu_time_LPCC, count_iter = exampleOptim(n, cpu_time_MILP, cpu_time_LPCC, count_iter)
-        #print(cpu_time_LPCC)
-    end
-
-    # Store the total CPU time for running the loop for the current value of n in the dictionary
-    cpu_times_MILP[n] = cpu_time_MILP
-    cpu_times_LPCC[n] = cpu_time_LPCC
-    
-    # Print total CPU time for running the loop for the current value of n
-    println("Average CPU time for minimizing f(x) using MILP for n = $n: ", cpu_time_MILP/count_iter)
-    println("Average CPU time for minimizing f(x) using LPCC for n = $n: ", cpu_time_LPCC/count_iter)
-end
