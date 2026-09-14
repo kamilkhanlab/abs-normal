@@ -108,6 +108,7 @@ end
 
 example_2()
 
+#=
 # consider the PA function:
 #   f(x)= abs(x1+abs(2x2-1))+abs(3+x3)
 # verify the existence of the global minimum of f(x)
@@ -131,7 +132,7 @@ function example_3()
 end
 
 example_3()
-
+=#
 
 # Matrix dimensions to consider:
 values_of_n = [2,5,10,20,50,100,200,300,400,500]  # Add more values as needed
