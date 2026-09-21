@@ -227,13 +227,13 @@ end #function
 # Z=27;   occurences=100;    dt= 0.0101;    initialize=1;
 # Z=30;   occurences=1000;   dt= 0.0010;    initalize=1;
 
-Z=31;   occurences=100;    dt= 0.0202;    initalize=1;
+# Z=31;   occurences=100;    dt= 0.0202;    initalize=1;
 # Z=32;   occurences=1000;   dt= 0.0020;    initalize=1;
 # Z=33;   occurences=200;    dt= 0.0101;    initalize=1;
 # Z=34;   occurences=500;    dt=0.0040;     initialize=1;
 
 # Z=38;   occurences=1000;   dt=0.002;      initialize=1;
-# Z=39;   occurences=1000;   dt=0.0010;     initialize=1;
+Z=39;   occurences=1000;   dt=0.0010;     initialize=1;
 
 
 xf_CCOEFF, xf_THETA, xk_raw_data = pull_data(Z)

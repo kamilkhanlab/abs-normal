@@ -1,3 +1,4 @@
+#FUNCTIONAL VERSION
 ##(1) Call Packages
 include("../src/AbsNormalWithoutBARON.jl")
 using .AbsNormal, LinearAlgebra, TimerOutputs, JuMP
@@ -225,7 +226,7 @@ function BETA_change(
     time_val,
     intermediate_m
 )
-    BETA_new = copy(BETA_original)
+    BETA_new = copy(BETA_original)        
     BETA_new[1:n_val] = BETA_new[1:n_val] + time_coeff*time_val
     BETA_new = intermediate_m\BETA_new 
 
@@ -302,7 +303,7 @@ end #function
 # Z=33;   occurences=200;    dt= 0.0101;    initialize=1;
 # Z=34;   occurences=500;    dt=0.0040;     initialize=1;
 
-Z = 35; occurences=1000; dt = 0.001;
+# Z = 35; occurences=1000; dt = 0.001; 
 # Z=38;   occurences=1000;   dt=0.002;      initialize=1;
 # Z=39;   occurences=1000;   dt=0.0010;     initialize=1;
 
