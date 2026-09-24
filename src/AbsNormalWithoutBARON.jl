@@ -10,7 +10,7 @@ import JuMP, PATHSolver, GLPK
 
 # A temporary PATH license that is valid for a year
 # Which can be found in https://pages.cs.wisc.edu/~ferris/path/julia/LICENSE
-PATHSolver.c_api_License_SetString("2830898829&Courtesy&&&USR&45321&5_1_2021&1000&PATH&GEN&31_12_2025&0_0_0&6000&0_0")
+PATHSolver.c_api_License_SetString("1259252040&Courtesy&&&USR&GEN2035&5_1_2026&1000&PATH&GEN&31_12_2035&0_0_0&6000&0_0") #Updated license
 
 export AnfCoeffs,
     SolutionApproachEq, BY_MLCP, BY_LCP,
@@ -119,6 +119,12 @@ function solve_pa_equation(
         
     else
         throw(DomainError(:approach, "unsupported equation-solving approach"))
+    end
+
+    # #TODO: REMOVE AFTERWARDS:
+    if terminationStatus == JuMP.OTHER_ERROR
+        println("JuMP Core Error Type: ", terminationStatus)
+        println("Solver Specific Reason: ", JuMP.raw_status(anfModel))
     end
 
     return xStar, terminationStatus, aMod

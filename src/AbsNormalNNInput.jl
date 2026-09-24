@@ -10,12 +10,12 @@ include("../src/AbsNormalWithoutBARON.jl")
 
 using .AbsNormal, LinearAlgebra, TimerOutputs, JuMP
 
-export generate_RELU, calculate_root, solve_ODE
+export SolutionApproachEq, generate_RELU, calculate_root, solve_ODE
 
 ##Generate ζ and β structure:
 function generate_RELU(
-    THETA::Vector{Matrix{Float64}},      #vector of NN coefficients
-    CCOEFF_BASE::Vector{Matrix{Float64}} #vector of NN intercepts
+    THETA::Array{Matrix{Float64}},      #vector of NN coefficients
+    CCOEFF_BASE::Array{Matrix{Float64}} #vector of NN intercepts
 )
     #Calculate neuron array information
     n = [size.(THETA, 2); size(THETA[end], 1)]
@@ -54,9 +54,9 @@ function generate_RELU(
 end #function 
 
 function generate_RELU(
-    THETA::Vector{Matrix{Float64}},           #vector of NN coefficients
-    CCOEFF_BASE::Vector{Matrix{Float64}},     #vector of NN intercepts
-    CCOEFF_TIME::Vector{Float64}              #vector of NN time specific intercept        
+    THETA::Array{Matrix{Float64}},           #vector of NN coefficients
+    CCOEFF_BASE::Array{Matrix{Float64}},     #vector of NN intercepts
+    CCOEFF_TIME::Array{Float64}              #vector of NN time specific intercept        
 )
     #Calculate neuron array information
     n = [size.(THETA, 2); size(THETA[end], 1)]
@@ -104,7 +104,8 @@ function calculate_root(
     b_coeff::Array{Float64}, 
     c_coeff::Array{Float64},
     P, Q, r;
-    solve_mode::String = "LCP"
+    solve_mode::SolutionApproachEq = AbsNormal.BY_LCP,
+    solverAttributes = (MOI.Silent() => true,)
 )
     #(a) Coefficient adjustement for P, Q, r: 
     Z_coeff_ = Z_coeff
@@ -117,31 +118,19 @@ function calculate_root(
 
     #(b) Solve root:
     anf = AbsNormal.AnfCoeffs(c_coeff_, b_coeff_, Z_coeff_, L_coeff_, J_coeff_, Y_coeff_)  
-    if solve_mode == "LCP"
-        try
-            rootVal, terminationStatusLCP = AbsNormal.solve_pa_equation(anf, approach=AbsNormal.BY_LCP, solverAttributes = (MOI.Silent() => true,));
-            @show terminationStatusLCP
+    try
+        rootVal, terminationStatus = AbsNormal.solve_pa_equation(anf, approach=solve_mode, solverAttributes = solverAttributes);
+        @show terminationStatus
 
-            return rootVal
-        catch err
-            println("LCP solver failed to run!\n")
-        end #try  
-
-    elseif solve_mode == "MLCP"
-        try
-            rootVal, terminationStatusMLCP = AbsNormal.solve_pa_equation(anf, approach=AbsNormal.BY_MLCP, solverAttributes = (MOI.Silent() => true,));
-            @show terminationStatusMLCP
-
-            return rootVal
-        catch err
-            println("MLCP solver failed to run!\n")
-        end #try 
-    end #if 
+        return rootVal
+    catch err
+        println("Solver failed to run!\n")
+    end #try  
 end #function 
 
 ##Calculate ODE:
 function solve_ODE(
-    INIT_COND::Vector{Any}, 
+    INIT_COND::Array{Float64}, 
     dt::Float64, 
     occurences::Int64,
     Z_coeff::Matrix{Float64}, 
@@ -150,7 +139,8 @@ function solve_ODE(
     Y_coeff::Matrix{Float64}, 
     BETA_BASE::Array{Float64}, 
     BETA_TIME::Array{Float64};
-    solve_mode::String = "LCP"
+    solve_mode::SolutionApproachEq = AbsNormal.BY_LCP,
+    solverAttributes = (MOI.Silent() => true,)
 )
     #Neuron array information:
     n_input = size(INIT_COND, 1); n_output = size(J_coeff, 1); n_neurons = size(L_coeff, 1);
@@ -178,7 +168,8 @@ function solve_ODE(
         xk_OUTPUT[:, i+1] = calculate_root(
             Z_coeff, L_coeff, J_coeff, Y_coeff, b_coeff_I, c_coeff_I,
             P, Q, rI;
-            solve_mode = "LCP"
+            solve_mode = solve_mode,
+            solverAttributes = solverAttributes
         )
     end #for 
 
