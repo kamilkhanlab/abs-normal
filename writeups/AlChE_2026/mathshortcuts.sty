@@ -1,0 +1,273 @@
+\ProvidesPackage{mathshortcuts}
+% Macros for maths notation that come up often.
+% Requires standard AMS packages
+% Last updated by Yulan Zhang on 2023
+
+% Programming
+\newcommand{\forLoop}{\texttt{for}--loop}
+
+% Standard sets and spaces
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\posReals}{\mathbb{R}_+}
+\newcommand{\nonnegReals}{\mathbb{R}_+\cup\{0\}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\natzero}{\mathbb{N}_0}
+\newcommand{\CD}{\mathcal{C}^1}
+\newcommand{\CDD}{\mathcal{C}^2}
+\newcommand{\domain}[1]{\mathrm{dom}\,#1}
+\newcommand{\setVMapping}[2]{#1 \rightrightarrows #2}
+
+% Limits
+\newcommand{\upTo}[1]{\to {#1}^-}
+\newcommand{\downTo}[1]{\to {#1}^+}
+\newcommand{\bigO}[1]{\mathcal{O}\!\left(#1\right)}
+
+% Operators
+\newcommand{\isByDefn}{:=}
+\newcommand{\couldEqual}{\stackrel{?}{=}}
+
+
+% Standard functions and relations
+%\DeclareMathOperator{\abs}{abs}
+%\DeclareMathOperator{\midThree}{mid}
+%\DeclareMathOperator{\sign}{sign}
+%\DeclareMathOperator*{\argmin}{argmin}
+\newcommand{\twoNorm}[1]{\left\| #1 \right\|_2}
+\newcommand{\inftyNorm}[1]{\left\| #1 \right\|_\infty}
+\newcommand{\branchFunc}[3]{\mathtt{IF[}#1,#2,#3\mathtt{]}}
+\newcommand{\ifThen}{\mathtt{if..then..else}}
+\newcommand{\setTo}{\gets}
+
+% Set theory
+\newcommand{\closure}[1]{\mathrm{cl}\!\left(#1\right)}
+\newcommand{\interior}[1]{\mathrm{int}(#1)}
+\newcommand{\boundary}[1]{\mathrm{bd}\left(#1\right)}
+\newcommand{\setMag}[1]{\left|#1\right|}
+\newcommand{\plenHull}[1]{\mathrm{plen}\,#1}
+
+% Boolean logic
+\newcommand{\boolAnd}{\mathtt{and}}
+\newcommand{\boolOr}{\mathtt{or}}
+\newcommand{\boolTrue}{\mathtt{true}}
+\newcommand{\boolFalse}{\mathtt{false}}
+
+% Interval arithmetic
+\newcommand{\interval}[1]{\mathbb{I} #1}
+\newcommand{\iDiam}[1]{w(#1)}
+
+% Convex/concave relaxations
+\newcommand{\convRel}[1]{{#1}^{\mathrm{cv}}}
+\newcommand{\concRel}[1]{{#1}^{\mathrm{cc}}}
+\newcommand{\relScheme}[3]{({#1}^{\mathrm{cv}}_{#2},{#1}^{\mathrm{cc}}_{#2})_{#2\subset #3}}
+\newcommand{\convRelSub}[2]{{#1}^{\mathrm{cv}}_{#2}}
+\newcommand{\concRelSub}[2]{{#1}^{\mathrm{cc}}_{#2}}
+\newcommand{\convRelDec}[1]{{#1}^{\mathrm{cv}}_{\mathrm{D}}}
+\newcommand{\convRelInc}[1]{{#1}^{\mathrm{cv}}_{\mathrm{I}}}
+\newcommand{\LB}[1]{{#1}^\mathrm{\ell}}
+\newcommand{\UB}[1]{{#1}^\mathrm{u}}
+\newcommand{\LBSub}[2]{{#1}^\mathrm{\ell}_{#2}}
+\newcommand{\UBSub}[2]{{#1}^\mathrm{u}_{#2}}
+\newcommand{\median}{\mathrm{mid}}
+
+% Piecewise continuously differentiable functions
+\newcommand{\PCD}{\mathcal{PC}^1}
+\newcommand{\PL}{\mathcal{PL}}
+\newcommand{\selFun}[2]{{#1}^{#2}\!}
+\newcommand{\selFns}[2]{\mathcal{F}_{#1}\!\left(#2\right)}
+\newcommand{\essActInd}[2]{\mathcal{I}_{#1}^e\left(#2\right)}
+\newcommand{\essActFns}[2]{\mathcal{F}_{#1}^e\!\left(#2\right)}
+\newcommand{\conActFns}[2]{\mathcal{F}_{#1}^c\!\left(#2\right)}
+\newcommand{\actConSubdiv}[2]{\Lambda_{#1}\!\left(#2\right)}
+\newcommand{\actCone}{\sigma}
+\newcommand{\nActCones}[1]{\nu{}}
+\newcommand{\actNormSet}[2]{\mathcal{H}_{#1}\!\left(#2\right)}
+\newcommand{\actNorm}[3]{\mathbf{a}^{(#3)}_{#1}(#2)}
+\newcommand{\elemLibrary}{\mathcal{L}}
+
+% Derivatives and gradients
+\newcommand{\jac}[1]{\mathbf{D} #1}
+\newcommand{\grad}[1]{{\nabla} #1}
+\newcommand{\hess}[1]{\nabla^2 #1}
+\newcommand{\gradS}[1]{\nabla #1}
+\newcommand{\pseudoJac}[1]{\hat{\mathbf{J}} #1}
+\newcommand{\pJac}[2]{{J}_{#1} #2}
+\newcommand{\dirDeriv}[3]{{#1}'(#2; #3)}
+\newcommand{\finiteDiff}[4]{\Delta_{#4}#1\left(#2; #3\right)}
+\newcommand{\genJac}[1]{\partial #1}
+\newcommand{\plenJac}[1]{\mathrm{plen}\,\partial #1}
+\newcommand{\genBDiff}[1]{\partial_\mathrm{B} #1}
+\newcommand{\lexDiff}[1]{\partial_\mathrm{L} #1}
+\newcommand{\lexDeriv}[3]{\mathbf{J}_\mathrm{L} #1(#2;#3)}
+\newcommand{\lexSingDeriv}[3]{\tilde{\mathbf{J}}_\mathrm{L} #1(#2;#3)}
+%\newcommand{\lexBasisDeriv}[3]{\hat{\mathbf{J}}_\mathrm{L} #1(#2;#3)}
+\newcommand{\lexBasisDeriv}[3]{{#1}'(#2;#3)}
+%\newcommand{\lexBasisBigDeriv}[3]{\hat{\mathbf{J}}_\mathrm{L} #1\left(#2;#3\right)}
+\newcommand{\lexBasisBigDeriv}[3]{{#1}'\!\left(#2;#3\right)}
+\newcommand{\conDiff}[1]{\partial_\mathrm{C} #1}
+\newcommand{\conDeriv}[3]{\mathbf{J}_\mathrm{C} #1(#2;#3)}
+\newcommand{\pGenJac}[2]{\partial_{#1} #2}
+\newcommand{\pd}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\ddt}[1]{\frac{d #1}{dt}}
+\newcommand{\pds}[2]{\frac{\hat{\partial}{#1}}{\partial{#2}}}
+\newcommand{\dt}[1]{\dot{#1}}
+
+% Vectors
+\newcommand{\uu}{\mathbf{u}}
+\newcommand{\oo}{\mathbf{o}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\cc}{\mathbf{c}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\lam}{\boldsymbol{\lambda}}
+\newcommand{\w}{\mathbf{w}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\z}{\mathbf{z}}
+\newcommand{\s}{\mathbf{s}}
+\newcommand{\e}{\mathbf{e}}
+\newcommand{\Sub}{\mathbf{S}}
+\newcommand{\p}{\mathbf{p}}
+\newcommand{\q}{{q}}
+\newcommand{\f}{\mathbf{f}}
+\newcommand{\g}{\mathbf{g}}
+\renewcommand{\d}{\mathbf{d}}
+\newcommand{\h}{\mathbf{h}}
+\renewcommand{\H}{\mathbf{H}}
+\renewcommand{\a}{{a}}
+\renewcommand{\c}{\mathbf{c}}
+\newcommand{\m}{{m}}
+\newcommand{\M}{{M}}
+\newcommand{\n}{{n}}
+\newcommand{\N}{{N}}
+\renewcommand{\r}{\mathbf{r}}
+\newcommand{\0}{\mathbf{0}}
+%\newcommand{\0}{{0}}
+\newcommand{\1}{{1}}
+\newcommand{\vCoord}[1]{\mathbf{e}_{(#1)}}
+\newcommand{\vBasis}[1]{{q}_{(#1)}}
+\newcommand{\vBasisAlt}[1]{{s}_{(#1)}}
+\newcommand{\vect}[1]{{#1}}
+\newcommand{\innerProd}[2]{\langle #1, #2 \rangle}
+\newcommand{\crossProd}[2]{#1\times #2}
+\newcommand{\F}{\mathbf{F}}
+
+
+% Matrices
+\newcommand{\A}{{A}}
+\newcommand{\B}{{B}}
+\newcommand{\W}{\mathbf{W}}
+\newcommand{\V}{\mathbf{V}}
+\newcommand{\J}{\mathbf{J}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\Y}{\mathbf{Y}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\mat}[1]{{#1}}
+\newcommand{\transpose}[1]{#1^{\mathrm{T}}}
+\newcommand{\standInJac}{\tilde{\mathbf{B}}}
+\newcommand{\emptyMatrix}[1]{\varnothing_{#1\times 0}}
+
+
+% Convex analysis
+\newcommand{\convHull}[1]{\mathrm{conv}#1}
+\newcommand{\linHull}[1]{\mathrm{span}#1}
+\newcommand{\affHull}[1]{\mathrm{aff}#1}
+\newcommand{\cone}[1]{\mathrm{cone}#1}
+\newcommand{\conicalSubdiv}{\Lambda}
+\newcommand{\nConesSubdiv}{n_\Lambda}
+\newcommand{\subdivCone}[1]{\sigma_{#1}}
+\newcommand{\subdiff}[1]{\partial #1}
+\newcommand{\normalSet}{\mathcal{H}}
+\newcommand{\normalVec}[1]{\mathbf{a}_{(#1)}}
+
+% Automatic differentiation
+\newcommand{\ADMult}{5}
+\newcommand{\dependsOn}{\succ}
+\newcommand{\helpsDefine}{\prec}
+\newcommand{\ADpsi}[1]{\bm{\psi}_{\left(#1\right)}}
+\newcommand{\ADcritPsi}[1]{\bm{\psi}^\ast_{\left(#1\right)}}
+\newcommand{\genericLibFn}{\bm{\psi}^\ast}
+\newcommand{\ADConActLibFn}[2]{\bm{\psi}^{#2}_{\left(#1\right)}}
+\newcommand{\dirDerivADLibFn}[3]{\bm{\psi}'_{\left(#1\right)}(#2;#3)}
+\newcommand{\ADLibFnDom}[1]{X_{\left(#1\right)}}
+\newcommand{\ADLibFnDirArg}[1]{\dot{\mathbf{u}}_{\left(#1\right)}}
+\newcommand{\ADLibFnRng}[1]{Y_{\left(#1\right)}}
+\newcommand{\ADCumFn}[2]{{#1}_{\left(#2\right)}}
+\newcommand{\ADDiffCumFn}[2]{\dot{#1}_{\left(#2\right)}}
+\newcommand{\ADv}[1]{\mathbf{v}_{\left(#1\right)}}
+\newcommand{\ADScalAuxVar}[1]{v_{\left(#1\right)}}
+\newcommand{\ADu}[1]{\mathbf{u}_{\left(#1\right)}}
+\newcommand{\ADw}[1]{\mathbf{w}_{\left(#1\right)}}
+\newcommand{\ADScalCumVar}[1]{u_{\left(#1\right)}}
+\newcommand{\ADdotV}[1]{\dot{\mathbf{v}}_{\left(#1\right)}}
+\newcommand{\ADbarV}[1]{\bar{\mathbf{v}}_{\left(#1\right)}}
+\newcommand{\ADScalDiffAuxVar}[1]{\dot{v}_{\left(#1\right)}}
+\newcommand{\ADdotU}[1]{\dot{\mathbf{u}}_{\left(#1\right)}}
+\newcommand{\ADbarU}[1]{\bar{\mathbf{u}}_{\left(#1\right)}}
+\newcommand{\ADdotW}[1]{\dot{\mathbf{w}}_{\left(#1\right)}}
+\newcommand{\ADScalDiffCumVar}[1]{\dot{u}_{\left(#1\right)}}
+\newcommand{\ADDiffCumVarCrit}{\dot{u}^\ast}
+\newcommand{\ADDiff}[1]{\dot{#1}}
+\newcommand{\firstDefStep}{0}
+\newcommand{\firstLibStep}{1}
+\newcommand{\lastLibStep}{\ell}
+\newcommand{\lastCutStep}[1]{p(#1)}
+\newcommand{\ADstack}[3]{[#1]_{#2\prec #3}}
+\newcommand{\ADline}[3]{[#1]^{\mathrm{T}}_{#2\prec #3}}
+\newcommand{\dirProbe}[2]{\dot{\mathbf{u}}_{(#1,#2)}}
+\newcommand{\dirCritProbe}[1]{\dot{\mathbf{u}}^\ast}
+
+% Generalized gradient propagation
+\newcommand{\boolCDCheck}[1]{\mathtt{isCD(}{#1}\mathtt{)}}
+\newcommand{\boolConeFunc}[1]{\zeta_{\,#1}}
+\newcommand{\boolConeCheck}[2]{\zeta_{\,#1}\!\left(#2\right)}
+\newcommand{\boolQUpdated}[1]{\mathtt{qUpdated(}{#1}\mathtt{)}}
+\newcommand{\ADCDLibFn}[1]{\bm{\phi}_{\left(#1\right)}}
+\newcommand{\ADDirDerivCumFn}[4]{{#1}'_{\left(#2\right)}\!\left(#3;#4\right)}
+\newcommand{\locallyCDFn}[1]{\tilde{#1}}
+\newcommand{\destCones}[1]{\Lambda^\ast_{\left(#1\right)}}
+\newcommand{\ADAuxVarSelFun}[1]{\mathbf{v}^\ast_{\left(#1\right)}}
+
+% Generalized McCormick relaxations
+\newcommand{\MCcv}[1]{{#1}^{\mathrm{cv}}}
+\newcommand{\MCcc}[1]{{#1}^{\mathrm{cc}}}
+\newcommand{\MCcvcv}[1]{{#1}^{\mathrm{cv\_cv}}}
+\newcommand{\MCcvcc}[1]{{#1}^{\mathrm{cv\_cc}}}
+\newcommand{\MCcccv}[1]{{#1}^{\mathrm{cc\_cv}}}
+\newcommand{\MCcccc}[1]{{#1}^{\mathrm{cc\_cc}}}
+\newcommand{\MClb}[1]{{#1}^{\mathrm{L}}}
+\newcommand{\MCub}[1]{{#1}^{\mathrm{U}}}
+\newcommand{\MCbounds}[1]{\mathbfit{#1}^{\mathsf{B}}}
+\newcommand{\MCrelax}[1]{\mathbfit{#1}^{\mathsf{C}}}
+\newcommand{\MCcut}[1]{\mathsf{Cut}(#1)}
+\newcommand{\MCsquash}[2]{\mathcal{S}\!\mathit{qu}_{#1}(#2)}
+\newcommand{\MCenc}[1]{\mathsf{Enc}(#1)}
+\newcommand{\MCbelt}[2]{\mathbfit{belt}_{#1}(#2)}
+\newcommand{\MCfunc}[3]{(#1,#2,#3)}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MCset}[1]{\mathbb{M} #1}
+\newcommand{\MCreals}{\mathbb{MR}}
+\newcommand{\MCpropReals}{\mathbb{MR}_{\mathsf{prop}}}
+\newcommand{\MCConv}[2]{\mathsf{Conv}(\lambda,#1,#2)}
+\newcommand{\MCp}[1]{p_{#1}}
+\newcommand{\MCmin}[1]{\zeta_{#1}^{\mathsf{min}}}
+\newcommand{\MCmax}[1]{\zeta_{#1}^{\mathsf{max}}}
+\newcommand{\MCUIcv}[1]{\underline{#1}^{\mathsf{C}}}
+\newcommand{\MCUIcc}[1]{\overline{#1}^{\mathsf{C}}}
+\newcommand{\MCwidth}[1]{\mathsf{wid}_{\mathcal{M}}\,#1}
+\newcommand{\MCVtoI}{[\mathbf{v}\to\mathbfit{i}]}
+
+% Interval analysis
+\newcommand{\intSet}[1]{\mathbb{I} #1}
+\newcommand{\intReals}{\mathbb{IR}}
+\newcommand{\intRealsProp}{\mathbb{IR}_{\mathsf{prop}}}
+\newcommand{\intWidth}[1]{\mathsf{wid}\,#1}
+\newcommand{\intF}[1]{\mathbfit{#1}}
+\newcommand{\intLb}[1]{{#1}^{\mathsf{L}}}
+\newcommand{\intUb}[1]{{#1}^{\mathsf{U}}}
+
+% Scaler 
+\newcommand{\fixedp}{\tilde{p}}
+
+% Miscellaneous
+\newcommand{\supth}[1]{{#1}^{\text{th}}}
