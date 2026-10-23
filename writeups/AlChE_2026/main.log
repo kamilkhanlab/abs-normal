@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.2.6)  23 OCT 2026 11:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.2.6)  23 OCT 2026 12:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1320,7 +1320,7 @@ LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <5> not available
 (Font)              Font shape `T1/phv/b/it' tried instead on input line 102.
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <5> not available
 (Font)              Font shape `T1/phv/b/sl' tried instead on input line 102.
-<images/mcmasterlogo.jpg, id=60, 237.0456pt x 131.0496pt>
+<images/mcmasterlogo.jpg, id=56, 237.0456pt x 131.0496pt>
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
 Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 102.
@@ -1340,7 +1340,7 @@ Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 110.
 
 pdfTeX warning: pdflatex.exe (file ./images/figAscent.pdf): PDF inclusion: foun
 d PDF version <1.5>, but at most version <1.4> allowed
-<images/figAscent.pdf, id=95, 216.81pt x 216.81pt>
+<images/figAscent.pdf, id=89, 216.81pt x 216.81pt>
 File: images/figAscent.pdf Graphic file (type pdf)
 <use images/figAscent.pdf>
 Package pdftex.def Info: images/figAscent.pdf  used on input line 152.
@@ -1359,7 +1359,7 @@ Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 152.
 
 pdfTeX warning: pdflatex.exe (file ./images/figSteep.pdf): PDF inclusion: found
  PDF version <1.5>, but at most version <1.4> allowed
-<images/figSteep.pdf, id=122, 216.81pt x 216.81pt>
+<images/figSteep.pdf, id=116, 216.81pt x 216.81pt>
 File: images/figSteep.pdf Graphic file (type pdf)
 <use images/figSteep.pdf>
 Package pdftex.def Info: images/figSteep.pdf  used on input line 152.
@@ -1394,7 +1394,7 @@ Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 173.
  [5
 
 ]
-<images/NeuralNetwork.jpg, id=150, 480.705pt x 455.301pt>
+<images/NeuralNetwork.jpg, id=144, 480.705pt x 455.301pt>
 File: images/NeuralNetwork.jpg Graphic file (type jpg)
 <use images/NeuralNetwork.jpg>
 Package pdftex.def Info: images/NeuralNetwork.jpg  used on input line 202.
@@ -1408,7 +1408,7 @@ Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 202.
  [6
 
  <./images/NeuralNetwork.jpg>]
-<images/NeuralODE.jpg, id=157, 637.071pt x 268.056pt>
+<images/NeuralODE.jpg, id=151, 637.071pt x 268.056pt>
 File: images/NeuralODE.jpg Graphic file (type jpg)
 <use images/NeuralODE.jpg>
 Package pdftex.def Info: images/NeuralODE.jpg  used on input line 221.
@@ -1453,278 +1453,276 @@ Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 403.
  [10
 
 ]
-<images/Mapping_NN.png, id=186, 891.768pt x 338.355pt>
+<images/Mapping_NN.png, id=180, 891.768pt x 338.355pt>
 File: images/Mapping_NN.png Graphic file (type png)
 <use images/Mapping_NN.png>
-Package pdftex.def Info: images/Mapping_NN.png  used on input line 466.
+Package pdftex.def Info: images/Mapping_NN.png  used on input line 467.
 (pdftex.def)             Requested size: 428.69768pt x 162.65637pt.
+
+Overfull \vbox (5.72447pt too high) detected at line 467
+ []
+
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 466.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 467.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
- [11
+[11
 
  <./images/Mapping_NN.png>]
-Overfull \hbox (13.17552pt too wide) in paragraph at lines 466--466
+Overfull \hbox (13.17552pt too wide) in paragraph at lines 467--467
 [][]  
  []
 
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 466.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 467.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
 [12
 
 ]
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 489.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 490.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
  [13
 
 ] (./main.toc)
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 539.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 540.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
  [14
 
 ]
-Overfull \vbox (15.55075pt too high) detected at line 607
- []
-
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 607.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 617.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
-[15
+ [15
 
 ]
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 607.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 617.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
  [16
 
 ]
-LaTeX Font Info:    Trying to load font information for T1+ptm on input line 65
-2.
+<images/Mapping_Transformation.png, id=223, 893.739pt x 436.905pt>
+File: images/Mapping_Transformation.png Graphic file (type png)
+<use images/Mapping_Transformation.png>
+Package pdftex.def Info: images/Mapping_Transformation.png  used on input line 
+617.
+(pdftex.def)             Requested size: 428.69768pt x 209.572pt.
+
+Overfull \vbox (21.19487pt too high) detected at line 617
+ []
+
+File: images/mcmasterlogo.jpg Graphic file (type jpg)
+<use images/mcmasterlogo.jpg>
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 617.
+(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
+[17
+
+ <./images/Mapping_Transformation.png>]
+Overfull \vbox (5.79697pt too high) detected at line 663
+ []
+
+File: images/mcmasterlogo.jpg Graphic file (type jpg)
+<use images/mcmasterlogo.jpg>
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 663.
+(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
+[18
+
+]
+Overfull \vbox (15.55075pt too high) detected at line 731
+ []
+
+File: images/mcmasterlogo.jpg Graphic file (type jpg)
+<use images/mcmasterlogo.jpg>
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 731.
+(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
+[19
+
+]
+File: images/mcmasterlogo.jpg Graphic file (type jpg)
+<use images/mcmasterlogo.jpg>
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 731.
+(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
+ [20
+
+]
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 77
+6.
  (c:/texlive/2025/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 652.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 776.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
- [17
+ [21
 
 ]
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 678.
-<images/horizonfunction.jpg, id=239, 676.71pt x 542.025pt>
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 802.
+<images/horizonfunction.jpg, id=252, 676.71pt x 542.025pt>
 File: images/horizonfunction.jpg Graphic file (type jpg)
 <use images/horizonfunction.jpg>
-Package pdftex.def Info: images/horizonfunction.jpg  used on input line 678.
+Package pdftex.def Info: images/horizonfunction.jpg  used on input line 802.
 (pdftex.def)             Requested size: 171.47644pt x 137.342pt.
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 678.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 802.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
- [18
+ [22
 
  <./images/horizonfunction.jpg>]
-<images/HorizonFuncFig1.png, id=245, 273.1806pt x 173.448pt>
+<images/HorizonFuncFig1.png, id=258, 273.1806pt x 173.448pt>
 File: images/HorizonFuncFig1.png Graphic file (type png)
 <use images/HorizonFuncFig1.png>
-Package pdftex.def Info: images/HorizonFuncFig1.png  used on input line 739.
+Package pdftex.def Info: images/HorizonFuncFig1.png  used on input line 863.
 (pdftex.def)             Requested size: 164.89752pt x 104.69698pt.
-<images/HorizonFuncFig2.png, id=246, 273.1806pt x 173.448pt>
+<images/HorizonFuncFig2.png, id=259, 273.1806pt x 173.448pt>
 File: images/HorizonFuncFig2.png Graphic file (type png)
 <use images/HorizonFuncFig2.png>
-Package pdftex.def Info: images/HorizonFuncFig2.png  used on input line 739.
+Package pdftex.def Info: images/HorizonFuncFig2.png  used on input line 863.
 (pdftex.def)             Requested size: 169.02423pt x 107.317pt.
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 739.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 863.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
- [19
+ [23
 
  <./images/HorizonFuncFig1.png (PNG copy)> <./images/HorizonFuncFig2.png (PNG c
 opy)>]
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 739.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 863.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
- [20
+ [24
 
 ]
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 827.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 951.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
- [21
+ [25
 
 ]
-Overfull \vbox (12.15689pt too high) detected at line 827
+Overfull \vbox (12.15689pt too high) detected at line 951
  []
 
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 827.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 951.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
-[22
+[26
 
 ]
-<images/Root_finding_S1.jpg, id=269, 681.09pt x 509.613pt>
-File: images/Root_finding_S1.jpg Graphic file (type jpg)
-<use images/Root_finding_S1.jpg>
-Package pdftex.def Info: images/Root_finding_S1.jpg  used on input line 865.
-(pdftex.def)             Requested size: 235.78502pt x 176.4232pt.
-
-Overfull \vbox (14.71353pt too high) detected at line 865
- []
-
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 865.
-(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
-[23
-
- <./images/Root_finding_S1.jpg>]
-<images/Root_finding_S2.jpg, id=275, 681.09pt x 510.708pt>
-File: images/Root_finding_S2.jpg Graphic file (type jpg)
-<use images/Root_finding_S2.jpg>
-Package pdftex.def Info: images/Root_finding_S2.jpg  used on input line 905.
-(pdftex.def)             Requested size: 235.78502pt x 176.80228pt.
-
-Overfull \vbox (11.28314pt too high) detected at line 905
- []
-
-File: images/mcmasterlogo.jpg Graphic file (type jpg)
-<use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 905.
-(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
-[24
-
- <./images/Root_finding_S2.jpg>]
-Overfull \hbox (20.15054pt too wide) detected at line 942
-[]
- []
-
-<images/Root_finding_S3.jpg, id=281, 681.09pt x 509.613pt>
-File: images/Root_finding_S3.jpg Graphic file (type jpg)
-<use images/Root_finding_S3.jpg>
-Package pdftex.def Info: images/Root_finding_S3.jpg  used on input line 942.
-(pdftex.def)             Requested size: 235.78502pt x 176.4232pt.
-File: images/mcmasterlogo.jpg Graphic file (type jpg)
-<use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 942.
-(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
-[25
-
- <./images/Root_finding_S3.jpg>]
-File: images/mcmasterlogo.jpg Graphic file (type jpg)
-<use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 959.
-(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
- [26
-
-] (./main.toc)
-File: images/mcmasterlogo.jpg Graphic file (type jpg)
-<use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 961.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1040.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
  [27
 
 ]
-File: images/mcmasterlogo.jpg Graphic file (type jpg)
-<use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1037.
-(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
- [28
-
-]
-File: images/mcmasterlogo.jpg Graphic file (type jpg)
-<use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1037.
-(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
- [29
-
-]
-<images/Mapping_Transformation.png, id=318, 893.739pt x 436.905pt>
-File: images/Mapping_Transformation.png Graphic file (type png)
-<use images/Mapping_Transformation.png>
-Package pdftex.def Info: images/Mapping_Transformation.png  used on input line 
-1037.
-(pdftex.def)             Requested size: 428.69768pt x 209.572pt.
-
-Overfull \vbox (21.19487pt too high) detected at line 1037
- []
-
-File: images/mcmasterlogo.jpg Graphic file (type jpg)
-<use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1037.
-(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
-[30
-
- <./images/Mapping_Transformation.png>]
-Overfull \vbox (5.79697pt too high) detected at line 1083
- []
-
-File: images/mcmasterlogo.jpg Graphic file (type jpg)
-<use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1083.
-(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
-[31
-
-]
-File: images/mcmasterlogo.jpg Graphic file (type jpg)
-<use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1171.
-(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
- [32
-
-]
-<images/NeuralODESolution_BFD.png, id=337, 903.375pt x 351.3125pt>
+<images/NeuralODESolution_BFD.png, id=286, 903.375pt x 351.3125pt>
 File: images/NeuralODESolution_BFD.png Graphic file (type png)
 <use images/NeuralODESolution_BFD.png>
 Package pdftex.def Info: images/NeuralODESolution_BFD.png  used on input line 1
-171.
+040.
 (pdftex.def)             Requested size: 278.65086pt x 108.36432pt.
 
-Overfull \vbox (18.62396pt too high) detected at line 1171
+Overfull \vbox (18.62396pt too high) detected at line 1040
  []
 
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1171.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1040.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
-[33
+[28
 
  <./images/NeuralODESolution_BFD.png>]
-<images/NeuralODE_Kuramoto.png, id=344, 702.625pt x 501.875pt>
+<images/NeuralODE_Kuramoto.png, id=293, 702.625pt x 501.875pt>
 File: images/NeuralODE_Kuramoto.png Graphic file (type png)
 <use images/NeuralODE_Kuramoto.png>
-Package pdftex.def Info: images/NeuralODE_Kuramoto.png  used on input line 1171
+Package pdftex.def Info: images/NeuralODE_Kuramoto.png  used on input line 1040
 .
 (pdftex.def)             Requested size: 235.78502pt x 168.41441pt.
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1171.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1040.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
- [34
+ [29
 
  <./images/NeuralODE_Kuramoto.png>]
+<images/Root_finding_S1.jpg, id=300, 681.09pt x 509.613pt>
+File: images/Root_finding_S1.jpg Graphic file (type jpg)
+<use images/Root_finding_S1.jpg>
+Package pdftex.def Info: images/Root_finding_S1.jpg  used on input line 1078.
+(pdftex.def)             Requested size: 235.78502pt x 176.4232pt.
+
+Overfull \vbox (14.71353pt too high) detected at line 1078
+ []
+
+File: images/mcmasterlogo.jpg Graphic file (type jpg)
+<use images/mcmasterlogo.jpg>
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1078.
+(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
+[30
+
+ <./images/Root_finding_S1.jpg>]
+<images/Root_finding_S2.jpg, id=306, 681.09pt x 510.708pt>
+File: images/Root_finding_S2.jpg Graphic file (type jpg)
+<use images/Root_finding_S2.jpg>
+Package pdftex.def Info: images/Root_finding_S2.jpg  used on input line 1118.
+(pdftex.def)             Requested size: 235.78502pt x 176.80228pt.
+
+Overfull \vbox (11.28314pt too high) detected at line 1118
+ []
+
+File: images/mcmasterlogo.jpg Graphic file (type jpg)
+<use images/mcmasterlogo.jpg>
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1118.
+(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
+[31
+
+ <./images/Root_finding_S2.jpg>]
+Overfull \hbox (20.15054pt too wide) detected at line 1155
+[]
+ []
+
+<images/Root_finding_S3.jpg, id=313, 681.09pt x 509.613pt>
+File: images/Root_finding_S3.jpg Graphic file (type jpg)
+<use images/Root_finding_S3.jpg>
+Package pdftex.def Info: images/Root_finding_S3.jpg  used on input line 1155.
+(pdftex.def)             Requested size: 235.78502pt x 176.4232pt.
+File: images/mcmasterlogo.jpg Graphic file (type jpg)
+<use images/mcmasterlogo.jpg>
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1155.
+(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
+[32
+
+ <./images/Root_finding_S3.jpg>]
+File: images/mcmasterlogo.jpg Graphic file (type jpg)
+<use images/mcmasterlogo.jpg>
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1172.
+(pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
+ [33
+
+]
 LaTeX Font Info:    Trying to load font information for T1+pcr on input line 11
-88.
- (c:/texlive/2025/texmf-dist/tex/latex/psnfss/t1pcr.fd
+89.
+
+(c:/texlive/2025/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 File: images/mcmasterlogo.jpg Graphic file (type jpg)
 <use images/mcmasterlogo.jpg>
-Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1188.
+Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1189.
 (pdftex.def)             Requested size: 41.17253pt x 22.76228pt.
- [35
+ [34
 
 ]
 \tf@nav=\write6
@@ -1741,71 +1739,42 @@ Package pdftex.def Info: images/mcmasterlogo.jpg  used on input line 1188.
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: 894352DCB96FB5DC9320E81269B10A83;2444
-(rerunfilecheck)             After:  5CC5B55FCD58BD6CA49D8FF060040BBA;2444.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 82F3DD27F44AD65543F6589AB8D48E9E;2175.
  ) 
 Here is how much of TeX's memory you used:
- 33789 strings out of 467533
- 704767 string characters out of 5423669
- 1163761 words of memory out of 5000000
- 61971 multiletter control sequences out of 15000+600000
+ 33771 strings out of 467533
+ 704548 string characters out of 5423669
+ 1163600 words of memory out of 5000000
+ 61963 multiletter control sequences out of 15000+600000
  717212 words of font info for 133 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,16n,123p,447b,976s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{Outline0.3.2.30} has been referenced but does not e
-xist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{Outline0.3.1.27} has been referenced but does not e
-xist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{Outline0.2.2.20} has been referenced but does not e
-xist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{Outline0.2.1.14} has been referenced but does not e
-xist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{Outline0.1.4.12} has been referenced but does not e
-xist, replaced by a fixed one
-
-<c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texli
-ve/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/t
-exmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb><c:/texlive/2025/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/font
-s/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi9.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmib10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmex
-tra/cmmib7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss1
-0.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/
-texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/20
-25/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2025/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmsy9.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfon
-ts/symbols/msam10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/s
-ymbols/msbm10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbo
-ls/msbm7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:
-/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/texlive/2025/t
-exmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb><c:/texlive/2025/texmf-dist/font
-s/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/hel
-vetic/uhvro8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on main.pdf (35 pages, 3279368 bytes).
+<c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/tex
+live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025
+/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb><c:/texlive/2025/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi9.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmib10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm
+extra/cmmib7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+s10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c
+:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/
+2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2025/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy9.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsf
+onts/symbols/msam10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts
+/symbols/msbm10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/sym
+bols/msbm7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><
+c:/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/texlive/2025
+/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb><c:/texlive/2025/texmf-dist/fo
+nts/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/h
+elvetic/uhvro8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pf
+b>
+Output written on main.pdf (34 pages, 3274435 bytes).
 PDF statistics:
- 478 PDF objects out of 1000 (max. 8388607)
- 88 named destinations out of 1000 (max. 500000)
- 214 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 450 PDF objects out of 1000 (max. 8388607)
+ 80 named destinations out of 1000 (max. 500000)
+ 206 words of extra memory for PDF output out of 10000 (max. 10000000)
 

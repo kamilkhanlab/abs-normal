@@ -5,8 +5,7 @@
 \beamer@subsectionintoc {1}{3}{Abs-normal forms}{8}{0}{1}
 \beamer@subsectionintoc {1}{4}{Complementary Problems}{13}{0}{1}
 \beamer@sectionintoc {2}{New results concerning piecewise-affine functions}{14}{0}{2}
-\beamer@subsectionintoc {2}{1}{New root-finding and optimization approaches}{15}{0}{2}
-\beamer@subsectionintoc {2}{2}{Implementation and examples}{21}{0}{2}
-\beamer@sectionintoc {3}{New results concerning ReLU Neural Networks}{27}{0}{3}
-\beamer@subsectionintoc {3}{1}{Root finding for ReLU neural networks}{28}{0}{3}
-\beamer@subsectionintoc {3}{2}{Root finding for neural ODE}{31}{0}{3}
+\beamer@subsectionintoc {2}{1}{Root finding for ReLU neural networks}{15}{0}{2}
+\beamer@subsectionintoc {2}{2}{Root finding for neural ODEs}{18}{0}{2}
+\beamer@subsectionintoc {2}{3}{New root-finding and optimization approaches}{19}{0}{2}
+\beamer@subsectionintoc {2}{4}{Implementation and examples}{25}{0}{2}
